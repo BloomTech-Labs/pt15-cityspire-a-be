@@ -1,9 +1,10 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable('saved_cities', (table) => {
     table.increments('id');
     table.string('name').notNullable();
     table.string('city_id').notNullable();
-    table.string('user_id')
+    table
+      .string('user_id')
       .unsigned()
       .notNullable()
       .references('profiles.id')
@@ -12,6 +13,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTableIfExists('saved_cities');
 };
