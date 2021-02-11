@@ -2,11 +2,11 @@ const express = require('express');
 const authRequired = require('../middleware/authRequired');
 const ownsFavorite = require('../middleware/ownsFavorite');
 const router = express.Router();
-const savedCities = require('/savedCities/savedCitiesModel');
+const savedCities = require('./savedCitiesModel');
 
 router.get('/', authRequired, function (req, res) {
   savedCities
-    .findByUser_Id(req.profile.id)
+    .findByUser_id(req.profile.id)
     .then((cities) => {
       res.status(200).json(cities);
     })
@@ -28,9 +28,9 @@ router.post('/', authRequired, function (req, res) {
     });
 });
 
-router.delete('/', authRequired, ownsFavorite, function (req, res) {
+router.delete('/:id', authRequired, ownsFavorite, function (req, res) {
   savedCities
-    .remove(req.body.id)
+    .remove(req.params.id)
     .then(() => {
       res.status(200).json({ message: 'deleted' });
     })
