@@ -1,5 +1,6 @@
 const express = require('express');
 const authRequired = require('../middleware/authRequired');
+const ownsFavorite = require('../middleware/ownsFavorite');
 const router = express.Router();
 const savedCities = require('/savedCities/savedCitiesModel');
 
@@ -27,7 +28,7 @@ router.post('/', authRequired, function (req, res) {
     });
 });
 
-router.delete('/', authRequired, function (req, res) {
+router.delete('/', authRequired, ownsFavorite, function (req, res) {
   savedCities
     .remove(req.body.id)
     .then(() => {
