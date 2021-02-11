@@ -17,6 +17,7 @@ router.get('/', authRequired, function (req, res) {
 });
 
 router.post('/', authRequired, function (req, res) {
+  req.body.user_id = req.profile.id;
   savedCities
     .create(req.body)
     .then((response) => {
