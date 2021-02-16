@@ -60,13 +60,12 @@ const authRequired = require('../middleware/authRequired');
  *      500:
  *        description: 'Error making prediction'
  */
-router.get('/predict/:x1/:x2/:3', authRequired, function (req, res) {
+router.get('/predict/:x1', authRequired, function (req, res) {
   const x1 = String(req.params.x1);
-  const x2 = String(req.params.x2);
-  const x3 = String(req.params.x3);
+  console.log(x1);
 
   dsModel
-    .getPrediction(x1, x2, x3)
+    .getPrediction(x1)
     .then((response) => {
       res.status(200).json(response.data);
     })
