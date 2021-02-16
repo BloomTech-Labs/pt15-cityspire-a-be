@@ -63,10 +63,12 @@ const findCityId = require('../middleware/findCityId');
  */
 router.get('/predict/:x1', authRequired, function (req, res) {
   const x1 = String(req.params.x1);
-
   dsModel
     .getPrediction(x1)
     .then((response) => {
+      [response.data.city, response.data.state] = findCityId(
+        response.data.id_num
+      ).split(', ');
       res.status(200).json(response.data);
     })
     .catch((error) => {
