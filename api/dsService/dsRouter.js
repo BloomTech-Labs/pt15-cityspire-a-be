@@ -111,4 +111,17 @@ router.get(
   }
 );
 
+router.get('/state_id/:id', authRequired, function (req, res) {
+  const id = req.params.id;
+  dsModel
+    .getStateId(id)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json(error);
+    });
+});
+
 module.exports = router;
