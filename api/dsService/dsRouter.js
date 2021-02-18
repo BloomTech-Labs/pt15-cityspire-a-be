@@ -91,4 +91,24 @@ router.get('/id_num/:x1', authRequired, function (req, res) {
     });
 });
 
+router.get(
+  '/recommend/:population/:crime_rate/:rental_rate/:walk_score',
+  authRequired,
+  function (req, res) {
+    const population = String(req.params.population);
+    const crimeRate = String(req.params.crime_rate);
+    const rentalRate = String(req.params.rental_rate);
+    const walkScore = String(req.params.walk_score);
+    dsModel
+      .getRecommend(population, crimeRate, rentalRate, walkScore)
+      .then((response) => {
+        res.status(200).json(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json(error);
+      });
+  }
+);
+
 module.exports = router;
