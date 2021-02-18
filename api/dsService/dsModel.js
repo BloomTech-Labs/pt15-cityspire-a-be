@@ -12,8 +12,12 @@ const getRecommend = (population, crime_rate, rental_rate, walk_score) => {
   );
 };
 
+const getStateId = (cityState) => {
+  return dsClient.get(`/state_id?city_state=${cityState}`);
+};
+
 const getViz = (state) => {
   return dsClient.get(`/viz/${state}`);
 };
 
-module.exports = { getPrediction, getViz, getRecommend };
+module.exports = { getPrediction, getViz, getRecommend, getStateId };
