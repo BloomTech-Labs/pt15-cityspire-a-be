@@ -6,7 +6,7 @@ const findCityId = require('../middleware/findCityId');
 
 /**
  * @swagger
- * /data/predict/{x1}/{x2}/{x3}:
+ * /data/predict/{cityState}:
  *  get:
  *    description: Get prediction for 3 inputs
  *    summary: Returns a prediction result
@@ -15,28 +15,12 @@ const findCityId = require('../middleware/findCityId');
  *    tags:
  *      - data
  *    parameters:
- *      - x1:
+ *      - cityState:
  *        name: x1
  *        in: path
- *        description: a positive number
+ *        description: A city and state
  *        required: true
- *        example: 3.14
- *        schema:
- *          type: number
- *      - x2:
- *        name: x2
- *        in: path
- *        description: a number
- *        required: true
- *        example: -42
- *        schema:
- *          type: number
- *      - x3:
- *        name: x3
- *        in: path
- *        description: label for prediction
- *        required: true
- *        example: banjo
+ *        example: Port Charlotte, Florida
  *        schema:
  *          type: string
  *    responses:
@@ -47,15 +31,27 @@ const findCityId = require('../middleware/findCityId');
  *            schema:
  *              type: object
  *              properties:
- *                prediction:
- *                  type: boolean
- *                  description: is prediction true or false
- *                probability:
+ *                id_num:
  *                  type: number
- *                  description: the probability between 0 and 1
+ *                  description: id for cities
+ *                population:
+ *                  type: number
+ *                  description: population
+ *                crime_rate:
+ *                  type: number
+ *                  description: crime_rate
+ *                rental_rate:
+ *                  type: number
+ *                  description: rental_rate
+ *                walk_score:
+ *                  type: number
+ *                  description: walk_score
  *              example:
- *                prediction: true
- *                probability: 0.9479960541387882
+ *                id_num: 5760
+ *                population: 62348
+ *                crime_rate: 30.31
+ *                rental_rate: 1799.74
+ *                walk_score: 17
  *      401:
  *        $ref: '#/components/responses/UnauthorizedError'
  *      500:
